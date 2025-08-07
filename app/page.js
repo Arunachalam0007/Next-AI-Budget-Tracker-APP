@@ -1,12 +1,11 @@
+import HeroSection from "@/components/herosection";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div>
-      <Button variant="destructive">
-        Welcome to the AI Budget Tracking App
-      </Button>
+    <div className="mt-40">
+      <HeroSection />
     </div>
   );
 }

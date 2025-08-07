@@ -18,6 +18,11 @@ tooltip
 
 
 
+Auth -> Clerk
+DB -> Supabase
+Bot Protection - Arcjet
+AI RECUURING - Inngest
+
 
 
 

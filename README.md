@@ -23,7 +23,11 @@ DB -> Supabase
 Bot Protection - Arcjet
 AI RECUURING - Inngest
 
+PRISMA:
 
+npm i -D prisma
+
+npx prisma init
 
 
 

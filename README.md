@@ -21,7 +21,7 @@ tooltip
 Auth -> Clerk
 DB -> Supabase
 Bot Protection - Arcjet
-AI RECUURING - Inngest
+AI RECUURING - Inngest (npx inngest-cli@latest dev)
 
 PRISMA:
 
@@ -29,7 +29,10 @@ npm i -D prisma
 
 npx prisma init
 
+## Push prisma Schema models to Database
+npx prisma migrate dev --name create-models
 
+npm install @prisma/client
 
 
 

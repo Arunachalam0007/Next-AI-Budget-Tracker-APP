@@ -10,8 +10,10 @@ import Link from "next/link";
 import React from "react";
 import { Button } from "./ui/button";
 import { LayoutDashboard, PenBox } from "lucide-react";
+import { checkUserAuthDB } from "@/lib/checkUserAuthDB";
 
-const Header = () => {
+const Header = async () => {
+  await checkUserAuthDB();
   return (
     <div className="fixed top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b ">
       <nav className="container mx-auto flex items-center justify-between px-4 py-4 ">

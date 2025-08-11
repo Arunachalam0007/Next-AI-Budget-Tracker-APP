@@ -13,7 +13,14 @@ import { LayoutDashboard, PenBox } from "lucide-react";
 import { checkUserAuthDB } from "@/lib/checkUserAuthDB";
 
 const Header = async () => {
+  // Check user authentication and database entry
+  // This will ensure that the user is authenticated and present in the database
+  // If the user is not authenticated, it will return null
+  // If the user is authenticated, it will return the user data
+  // This is useful for ensuring that the user is authenticated before rendering the header
+  // and to fetch user data for display
   await checkUserAuthDB();
+
   return (
     <div className="fixed top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b ">
       <nav className="container mx-auto flex items-center justify-between px-4 py-4 ">
@@ -26,6 +33,8 @@ const Header = async () => {
             className="h-12 w-auto object-contain"
           />
         </Link>
+
+        {/* clerk  */}
         <div className="flex items-center space-x-4">
           <SignedOut>
             <SignInButton forceRedirectUrl="/dashboard">
@@ -39,6 +48,7 @@ const Header = async () => {
             </SignUpButton> */}
           </SignedOut>
 
+          {/* If the user is signed in, show the dashboard and create transaction buttons */}
           <SignedIn>
             {/* Dashboard */}
             <Link href={"/dashboard"} className="flex items-center gap-2">
@@ -61,7 +71,8 @@ const Header = async () => {
               </Button>
             </Link>
           </SignedIn>
-
+          
+          {/*If the user is signed in, User Profile Button */}
           <SignedIn>
             <UserButton
               appearance={{

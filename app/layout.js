@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
     <ClerkProvider>
       <html lang="en">
         <body className={`${inter.className}`}>
-          {/* Header */}
+          {/* Header Here we are calling clerk Auth and DB */}
           <Header />
 
           {/* Main content */}

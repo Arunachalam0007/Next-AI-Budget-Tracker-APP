@@ -17,6 +17,16 @@ table
 tooltip
 
 
+## Used Form Validations Packages
+
+react-hook-form
+zod
+@hookform/resolvers (which is used to connect zod and react-hook-form)
+
+## Used Exernal Packages
+
+react-spinners
+
 
 Auth -> Clerk
 DB -> Supabase

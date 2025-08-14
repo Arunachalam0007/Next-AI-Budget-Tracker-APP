@@ -5,7 +5,7 @@ import { BarLoader } from "react-spinners";
 const DashboardLayout = () => {
   return (
     <div className="px-5">
-      <h1 className="text-6xl font-bold mb-5 bg-gradient-to-br from-blue-600 to-purple-600  text-transparent bg-clip-text">
+      <h1 className="max-sm:text-4xl text-6xl font-bold mb-5 bg-gradient-to-br from-blue-600 to-purple-600  text-transparent bg-clip-text">
         Dashboard
       </h1>
       {/* Dashboard Page */}

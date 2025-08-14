@@ -1,6 +1,7 @@
 "use server";
 import db from "@/lib/prismadb";
 import { auth } from "@clerk/nextjs/server";
+import { revalidatePath } from "next/cache";
 
 const serializeTransaction = (obj) => {
   const serialized = { ...obj };
@@ -53,7 +54,60 @@ export async function updateIsDefaultAccount(account) {
       },
     });
 
+    // Revalidate the dashboard path to update the cache
+    revalidatePath("/dashboard");
+
     return { success: true, data: serializeTransaction(updatedAccount) };
+  } catch (error) {
+    throw new Error(error.message);
+  }
+}
+
+export async function getAccountsWithTransations(accountId) {
+  try {
+    const { userId } = await auth();
+    if (!userId) {
+      throw new Error("User not Authenticated");
+    }
+
+    console.log("DEBUG: userId: ", userId);
+
+    const loggedInUser = await db.user.findUnique({
+      where: {
+        clerkUserId: userId,
+      },
+    });
+
+    console.log("DEBUG: loggedInUser: ", loggedInUser);
+
+    if (!loggedInUser) {
+      throw new Error("User not found in the database");
+    }
+
+    const accountData = await db.account.findUnique({
+      where: {
+        id: accountId,
+        userId: loggedInUser.id,
+      },
+      include: {
+        transactions: {
+          orderBy: {
+            date: "desc",
+          },
+        },
+        _count: {
+          select: {
+            transactions: true,
+          },
+        },
+      },
+    });
+
+    if (!accountData) return null;
+    return {
+      ...serializeTransaction(accountData),
+      transactions: accountData.transactions.map(serializeTransaction),
+    };
   } catch (error) {
     throw new Error(error.message);
   }

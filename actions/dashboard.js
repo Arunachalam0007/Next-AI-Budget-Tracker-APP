@@ -19,8 +19,6 @@ export async function createAccount(data) {
     // Get current user's ID from Clerk
     const { userId } = await auth();
 
-    console.log("User ID:", userId);
-
     if (!userId) {
       throw new Error("User not authenticated");
     }
@@ -59,13 +57,6 @@ export async function createAccount(data) {
         data: { isDefault: false },
       });
     }
-
-    console.log("Creating account with data:", {
-      ...data,
-      userId: loggedInUser.id,
-      balance: balanceFloat,
-      isDefault: shouldBeDefault,
-    });
 
     // Create the new account
     const currentAccount = await db.account.create({

@@ -1,10 +1,13 @@
 import { getAccountsWithTransations } from "@/actions/accounts";
 import { notFound } from "next/navigation";
 import TrasactionsTable from "@/components/transactions-table";
-import React from "react";
+import React, { Suspense } from "react";
+import { BarLoader } from "react-spinners";
 
 const AccountPage = async ({ params }) => {
-  const accountData = await getAccountsWithTransations(params.id);
+  // ✅ await params
+  const { id } = await params;
+  const accountData = await getAccountsWithTransations(id);
 
   console.log("accountData: ", accountData);
 
@@ -35,9 +38,11 @@ const AccountPage = async ({ params }) => {
       </div>
 
       {/* Transactions Filters & Tables*/}
-      <div>
+      <Suspense
+        fallback={<BarLoader className="mt-4" width={"100%"} color="#9333ea" />}
+      >
         <TrasactionsTable transactions={transactions} />
-      </div>
+      </Suspense>
     </div>
   );
 };

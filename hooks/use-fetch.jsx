@@ -14,6 +14,8 @@ const useFetchHook = (cb) => {
       setIsLoading(false);
       setData(response);
     } catch (error) {
+      console.log("HOOKS ERROR: ", error);
+
       setError(error);
       toast.error(error.message);
     } finally {

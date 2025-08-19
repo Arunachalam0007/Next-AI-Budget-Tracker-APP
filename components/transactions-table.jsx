@@ -175,7 +175,7 @@ const TrasactionsTable = ({ transactions }) => {
     router.push(`/transaction/create?edit=${currentTransaction.id}`);
   };
 
-  const handleBulkDeleteTransaction = (currentTransaction) => {
+  const handleBulkDeleteTransaction = async (currentTransaction) => {
     bulkDeleteFn(selectIds);
   };
   const handleClearFilters = () => {
@@ -458,7 +458,7 @@ const TrasactionsTable = ({ transactions }) => {
                         </DropdownMenuLabel>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                          onClick={handleBulkDeleteTransaction}
+                          onClick={() => bulkDeleteFn([transaction.id])}
                           className="text-red-600"
                         >
                           Delete

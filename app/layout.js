@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
 
           {/* Main content */}
           <main className="min-h-screen"> {children} </main>
-          <Toaster richColors />
+          <Toaster position="bottom-center" richColors />
 
           {/* Footer */}
           <footer className="bg-blue-50 py-12">

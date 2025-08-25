@@ -15,6 +15,9 @@ select
 switch
 table
 tooltip
+AlertDialog
+ProgressBar
+
 
 
 ## Used Form Validations Packages
@@ -44,6 +47,46 @@ npx prisma init
 npx prisma migrate dev --name create-models
 
 npm install @prisma/client
+
+
+## Prisma
+
+Aggregate :  which is used to sum of the amount based on grater and lesser date
+
+const oneMonthExpenses = await db.transaction.aggregate({
+    where: {
+      userId: loggedInUser.id,
+      accountId,
+      type: "EXPENSE",
+      date: {
+        gte: startOfMonth, // get-> grater Then
+        lte: endOfMonth, // lte -> Lesser Then
+      },
+    },
+    _sum: {
+      amount: true, // Sum the amount of Expense based on date
+    },
+  });
+
+
+  upsert: is used to find and update the value or if not inster the value
+
+      const updatedBudget = await db.budget.upsert({
+      where: {
+        userId: loggedInUser.id,
+      },
+      update: {
+        amount: budgetAmount,
+      },
+      create: {
+        userId: loggedInUser.id,
+        amount: budgetAmount,
+      },
+    });
+
+
+
+
 
 
 

@@ -1,5 +1,7 @@
+import { getCurrentBudgetAndExpenseAmountBasedOnDate } from "@/actions/budget";
 import { getAllAccounts } from "@/actions/dashboard";
 import AccountsCard from "@/components/accounts-card";
+import BudgetProgress from "@/components/buget-progress";
 import CreateAccountDrawer from "@/components/create-account-drawer";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
@@ -10,10 +12,29 @@ const DashboardPage = async () => {
 
   console.log("accountsData: ", accountsData);
 
-  return (
-    <div className="px-5">
-      {/* Budget Progress */}
+  let defaultBudgetData = null;
 
+  const defaultAccount = accountsData?.find((account) => account.isDefault);
+
+  if (defaultAccount) {
+    defaultBudgetData = await getCurrentBudgetAndExpenseAmountBasedOnDate(
+      defaultAccount.id,
+      null,
+      null
+    );
+  }
+
+  console.log("defaultBudgetData: ", defaultBudgetData);
+
+  return (
+    <div className="px-5 space-y-8">
+      {/* Budget Progress */}
+      {defaultAccount && (
+        <BudgetProgress
+          initialBudget={defaultBudgetData.budget}
+          currentExpense={defaultBudgetData?.currentExpense || 0}
+        />
+      )}
       {/* Overview */}
 
       {/* Accounts Grid */}

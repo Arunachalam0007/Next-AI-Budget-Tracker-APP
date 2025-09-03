@@ -150,6 +150,7 @@ export async function bulkDeleteTransaction(transactionIds) {
 
     // Here $transaction is Prisma one not Normal table transcation
     // $transaction is used to update and delete all if which is fails can't affect other process
+    // $transaction is reserved keyword in prisma
     await db.$transaction(async (tx) => {
       // Delete all the selected transactions
       await tx.transaction.deleteMany({

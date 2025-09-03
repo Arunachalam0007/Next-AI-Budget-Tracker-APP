@@ -85,9 +85,50 @@ const oneMonthExpenses = await db.transaction.aggregate({
     });
 
 
+## $ prisma reserved keyword
+    // Here $transaction is Prisma one not Normal table transcation
+    // $transaction is used to update and delete all if which is fails can't affect other process
+    // $transaction is reserved keyword in prisma
+    await db.$transaction(async (tx) => {
+      // Delete all the selected transactions
+      await tx.transaction.deleteMany({
+        where: {
+          userId: loggedInUser.id,
+          id: {
+            in: transactionIds,
+          },
+        },
+      });
+
+      // Update the account balances
+      for (const [accountId, balanceChange] of Object.entries(
+        accountBalanceChanges
+      )) {
+        await tx.account.update({
+          where: { id: accountId },
+          data: {
+            balance: {
+              increment: balanceChange,
+            },
+          },
+        });
+      }
+    });
+
+    // Revalidate paths (App Router only)
+    // revalidatePath("/dashboard");
+    revalidatePath("/account/[id]");
 
 
 
+
+## set button prop type ="button" when we use route
+
+ <Button variant="outline"
+  type="button"
+   onClick={() => router.back()}>
+          Cancel
+        </Button>
 
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).

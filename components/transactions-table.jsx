@@ -399,7 +399,7 @@ const TrasactionsTable = ({ transactions }) => {
                       style={{
                         background: categoryColors[transaction.category],
                       }}
-                      className="px-2 py-1 text-sm capitalize text-white rounded"
+                      className="px-2 py-1 text-sm capitalize text-white bg-black rounded"
                     >
                       {transaction.category}
                     </span>

@@ -25,12 +25,19 @@ const Header = async () => {
     <div className="fixed top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b ">
       <nav className="container mx-auto flex items-center justify-between px-4 py-4 ">
         <Link href={"/"}>
-          <Image
+          {/* <Image
             src={"/logo.png"}
             alt="Tracker App logo"
             height={50}
             width={200}
             className="h-12 w-auto object-contain"
+          /> */}
+          <Image
+            src={"/new-logo.png"}
+            alt="Tracker App logo"
+            height={50}
+            width={200}
+            className="h-15 w-auto object-contain"
           />
         </Link>
 
@@ -71,7 +78,7 @@ const Header = async () => {
               </Button>
             </Link>
           </SignedIn>
-          
+
           {/*If the user is signed in, User Profile Button */}
           <SignedIn>
             <UserButton

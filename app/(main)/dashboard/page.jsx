@@ -1,8 +1,9 @@
 import { getCurrentBudgetAndExpenseAmountBasedOnDate } from "@/actions/budget";
-import { getAllAccounts } from "@/actions/dashboard";
+import { getAllAccounts, getDashboardData } from "@/actions/dashboard";
 import AccountsCard from "@/components/accounts-card";
 import BudgetProgress from "@/components/buget-progress";
 import CreateAccountDrawer from "@/components/create-account-drawer";
+import { DashboardOverview } from "@/components/transaction-overview";
 import { Card, CardContent } from "@/components/ui/card";
 import { Plus } from "lucide-react";
 import React from "react";
@@ -24,7 +25,7 @@ const DashboardPage = async () => {
     );
   }
 
-  console.log("defaultBudgetData: ", defaultBudgetData);
+  const transactions = await getDashboardData();
 
   return (
     <div className="px-5 space-y-8">
@@ -36,6 +37,12 @@ const DashboardPage = async () => {
         />
       )}
       {/* Overview */}
+
+      {/* Dashboard Overview */}
+      <DashboardOverview
+        accounts={accountsData}
+        transactions={transactions || []}
+      />
 
       {/* Accounts Grid */}
       <div className="grid max-sm:grid-cols-1 grid-cols-2 md:grid-cols-3 gap-4">

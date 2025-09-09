@@ -143,11 +143,13 @@ const TrasactionsTable = ({ transactions }) => {
   }, [transactions, searchTerm, typeFilter, recurringFilter, sortConfig]);
 
   useEffect(() => {
+    console.log("DEBUG: Deleted Transaction: ", deletedTransaction);
+
     if (deletedTransaction && !isDeleteTransLoading) {
       setSelectIds([]);
-      if (deletedTransaction.sucess) {
+      if (deletedTransaction.success) {
         toast.success("Transaction Deleted Sucessfully");
-      } else if (!deletedTransaction.sucess) {
+      } else if (!deletedTransaction.success) {
         toast.error(
           `Unable to delete the transaction: ${deletedTransaction.error}`
         );

@@ -51,7 +51,7 @@ npm install @prisma/client
 
 ## Prisma
 
-Aggregate :  which is used to sum of the amount based on grater and lesser date
+## Aggregate :  which is used to sum of the amount based on grater and lesser date
 
 const oneMonthExpenses = await db.transaction.aggregate({
     where: {
@@ -69,7 +69,7 @@ const oneMonthExpenses = await db.transaction.aggregate({
   });
 
 
-  upsert: is used to find and update the value or if not inster the value
+ ## upsert: is used to find and update the value or if not inster the value
 
       const updatedBudget = await db.budget.upsert({
       where: {
@@ -120,7 +120,27 @@ const oneMonthExpenses = await db.transaction.aggregate({
     revalidatePath("/account/[id]");
 
 
+## Prisma OR Condition
 
+ const recurringTransactions = await step.run(
+      "fetch-recurring-transactions",
+      async () => {
+        return await db.transaction.findMany({
+          where: {
+            isRecurring: true,
+            status: "COMPLETED",
+            OR: [
+              { lastProcessed: null },
+              {
+                nextRecurringDate: {
+                  lte: new Date(),
+                },
+              },
+            ],
+          },
+        });
+      }
+    );
 
 ## set button prop type ="button" when we use route
 
